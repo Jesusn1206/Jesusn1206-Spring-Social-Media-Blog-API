@@ -35,6 +35,9 @@ public class SocialMediaController {
         if (newAccount.isPresent()) {
             return ResponseEntity.ok(newAccount.get());
         }
+        if(accountService.userExists(account)){
+            return ResponseEntity.status(409).build();
+        }
         return ResponseEntity.status(400).build();
     }
 

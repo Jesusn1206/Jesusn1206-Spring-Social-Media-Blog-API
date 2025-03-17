@@ -13,6 +13,14 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
+    public Boolean userExists(Account account){
+        if (accountRepository.findByUsername(account.getUsername()).isPresent()) {
+            return true;
+        }
+        return false;
+
+    }
+
     public Optional<Account> registerAccount(Account account) {
         // Ensure username is not blank and password is at least 4 characters
         if (account.getUsername().isBlank() || account.getPassword().length() < 4) {
